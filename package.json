@@ -1,0 +1,37 @@
+{
+  "name": "dsh-mobile-access",
+  "version": "1.0.0",
+  "description": "DeepSeek Harness 移动端访问插件：PC 审批门禁 · 局域网/VPN/公网自动识别与模式切换 · 网关代理（0.0.0.0 端口转发）· 扫码访问 · WebSocket 实时转发 · 窄屏 UI 适配（自动禁用第三方皮肤）",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "dsh-mobile-access.js",
+    "README.md"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TongaiLinC/dsh-mobile-access"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "cordis",
+    "plugin",
+    "mobile",
+    "lan",
+    "tailscale",
+    "zerotier"
+  ]
+}

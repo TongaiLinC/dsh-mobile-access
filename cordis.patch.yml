@@ -1,0 +1,12 @@
+# dsh-mobile-access bundle patch: inserts the host-only plugin row into the
+# web profile roster. Applied as a profile bundle layer (the `dsh.bundle.patch`
+# manifest field) over dsh-base; activate with
+# `dsh plugin --profile web add dsh-mobile-access` (or a local `link:` path).
+#
+# The row is a bare plugin by package name: the node half (exports ".") runs
+# in the host process (device approval gate, LAN/VPN detection, gateway proxy,
+# /dsh-mobile/api routes, index injection). The plugin is host-only — it has
+# no client half; all browser UI ships through webServer.tapIndex as boot.js.
+- insert:
+    - id: dsh-mobile-access
+      name: 'dsh-mobile-access'
