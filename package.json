@@ -1,6 +1,6 @@
 {
   "name": "dsh-mobile-access",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "DeepSeek Harness 移动端访问插件：PC 审批门禁 · 局域网/VPN/公网自动识别与模式切换 · 网关代理（0.0.0.0 端口转发）· 扫码访问 · WebSocket 实时转发 · 窄屏 UI 适配（自动禁用第三方皮肤）",
   "type": "module",
   "main": "lib/index.js",
