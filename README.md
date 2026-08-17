@@ -59,7 +59,7 @@ dsh-mobile-access/                  # 本仓库即一个可安装的 DSH 插件�
 ```bash
 # 本地目录安装（开发）
 dsh plugin --profile web add dsh-mobile-access
-# 或从 GitHub 安装
+# 或从 GitHub 安装（锁定发布版本 v1.0.0）
 dsh plugin --profile web add dsh-mobile-access@github:TongaiLinC/dsh-mobile-access
 ```
 
