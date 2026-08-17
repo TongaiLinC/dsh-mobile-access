@@ -12,6 +12,8 @@
 [![中文](https://img.shields.io/badge/%E4%B8%AD%E6%96%87-README-blue.svg)](README.md)
 [![English](https://img.shields.io/badge/English-README--en-blue.svg)](README.en.md)
 
+**🌐 语言 / Language：[中文](README.md) · [English](README.en.md)**
+
 </div>
 
 ---

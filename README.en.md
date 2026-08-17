@@ -12,6 +12,8 @@ Let phones and tablets reach the DeepSeek Harness Web GUI over LAN or VPN, with 
 [![English](https://img.shields.io/badge/English-README--en-blue.svg)](README.en.md)
 [![中文](https://img.shields.io/badge/%E4%B8%AD%E6%96%87-README-blue.svg)](README.md)
 
+**🌐 Language / 语言：[English](README.en.md) · [中文](README.md)**
+
 </div>
 
 ---
