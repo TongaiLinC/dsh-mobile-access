@@ -26,9 +26,7 @@ dsh-mobile-access/                  # 本仓库即一个可安装的 DSH 插件�
 ├── cordis.patch.yml                # 组合补丁：向 profile 插入插件行
 ├── lib/index.js                    # Host 插件本体（静态 cordis 插件，ESM）
 ├── dsh-mobile-access.js            # 动态版源码（code.host 函数体，用于会话内 cordis_define）
-├── README.md                       # 本文件
-└── docs/
-    └── 第十七章-移动端访问插件实战.md   # 完整开发与使用文档（17 章）
+└── README.md                       # 本文件
 ```
 
 ## 环境要求
@@ -37,6 +35,15 @@ dsh-mobile-access/                  # 本仓库即一个可安装的 DSH 插件�
 - 运行 DSH 的 PC 与本机网络环境（Windows / macOS / Linux 均可，地址枚举自动适配）
 - 手机与 PC 处于同一局域网（局域网访问），或两端安装 Tailscale / ZeroTier（VPN 访问）
 - Windows 用户：防火墙需放行网关端口（默认 `3081`，TCP 入站）
+
+## 开发环境
+
+本插件使用 DeepSeek Harness 的**创造模式**开发：
+
+- 主要模型：`deepseek-v4-flash`（Max 模式）
+- 辅助模型：`deepseek-v4-pro`（Max 模式）
+
+移动端适配均通过 Playwright 真实浏览器（iPhone / 安卓视口）断言验证；完整开发与使用文档见文档站《DSH 指南 → 第十七章 移动端访问插件实战》。
 
 ## 安装（正式安装，重启后自动加载）
 
