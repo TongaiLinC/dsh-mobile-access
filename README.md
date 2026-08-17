@@ -56,7 +56,7 @@ DeepSeek Harness 的 Web 服务器出于安全设计只绑定 `127.0.0.1`，且�
 dsh plugin --profile web add dsh-mobile-access
 
 # 或从 GitHub 安装（锁定发布版本 v1.0.0）
-dsh plugin --profile web add dsh-mobile-access@github:TongaiLinC/dsh-mobile-access
+dsh plugin --profile web add dsh-mobile-access@github:TongaiLinC/dsh-mobile-access#v1.0.2
 ```
 
 ### 方式二：手动编辑 profile（与现有插件一致）
