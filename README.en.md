@@ -1,10 +1,33 @@
-# dsh-mobile-access
+<div align="center">
 
-> [中文文档](README.md) | English
+# 📱 dsh-mobile-access
 
-Mobile access plugin for DeepSeek Harness — let phones and tablets reach the DeepSeek Harness Web GUI over LAN or VPN, with a built-in **PC-side approval gate**, automatic **LAN / VPN / WAN detection**, and **network-mode switching**.
+**Mobile access plugin for DeepSeek Harness**
 
-> For security, the DeepSeek Harness web server binds `127.0.0.1` only, and `--host 0.0.0.0` is intentionally disallowed. This plugin works through the plugin runtime (`webServer` + `subprocess`): the PC starts a **gateway proxy** (`0.0.0.0:<port>`) with one click, phones scan a QR code to connect, and first access must be approved on the PC — keeping unauthorized devices out.
+Let phones and tablets reach the DeepSeek Harness Web GUI over LAN or VPN, with a built-in **PC-side approval gate**, automatic **LAN / VPN / WAN detection**, and **network-mode switching**.
+
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![dsh-plugin](https://img.shields.io/badge/topic-dsh--plugin-brightgreen)](https://github.com/topics/dsh-plugin)
+[![GitHub repo size](https://img.shields.io/github/repo-size/TongaiLinC/dsh-mobile-access)](https://github.com/TongaiLinC/dsh-mobile-access)
+[![English](https://img.shields.io/badge/English-README--en-blue.svg)](README.en.md)
+[![中文](https://img.shields.io/badge/%E4%B8%AD%E6%96%87-README-blue.svg)](README.md)
+
+</div>
+
+---
+
+For security, the DeepSeek Harness web server binds `127.0.0.1` only, and `--host 0.0.0.0` is intentionally disallowed. This plugin works through the plugin runtime (`webServer` + `subprocess`): the PC starts a **gateway proxy** (`0.0.0.0:<port>`) with one click, phones scan a QR code to connect, and first access must be approved on the PC — keeping unauthorized devices out.
+
+## 📑 Table of contents
+
+- [✦ Features](#features)
+- [✦ Installation](#installation)
+- [✦ Quick start](#quick-start)
+- [✦ How it works](#how-it-works)
+- [✦ FAQ](#faq)
+- [✦ Third-party adaptation](#third-party-adaptation)
+- [✦ Documentation](#documentation)
+- [✦ License](#license)
 
 ---
 
@@ -20,43 +43,19 @@ Mobile access plugin for DeepSeek Harness — let phones and tablets reach the D
 - ✅ **Mobile UI adaptation**: input-bar tool/action rows auto-wrap, settings modal goes fullscreen, skin character layers avoid overlaps, font sizes tuned for phone screens
 - ✅ **State persistence**: devices, policy, and mode selections are stored in `$DSH_HOME/dsh-mobile/state.json` and survive restarts
 
-## Repository layout
+---
 
-```
-dsh-mobile-access/                  # this repo IS an installable DSH plugin package (npm layout)
-├── package.json                    # package manifest: dsh.bundle.patch points at cordis.patch.yml
-├── cordis.patch.yml                # composition patch: inserts the plugin row into the profile
-├── lib/index.js                    # Host plugin body (static cordis plugin, ESM)
-├── dsh-mobile-access.js            # dynamic source (code.host function body for in-session cordis_define)
-└── README.md / README.en.md        # this file
-```
+## Installation
 
-## Requirements
-
-- DeepSeek Harness (Web GUI build) with the Cordis plugin system
-- A PC running DSH with normal network access (Windows / macOS / Linux — address enumeration auto-adapts)
-- Phone and PC on the same LAN (for LAN access), or Tailscale / ZeroTier installed on both (for VPN access)
-- Windows users: allow the gateway port (default `3081`, TCP inbound) through the firewall
-
-## Development environment
-
-This plugin is developed with DeepSeek Harness in **Create mode**:
-
-- Primary model: `deepseek-v4-flash` (Max mode)
-- Secondary model: `deepseek-v4-pro` (Max mode)
-
-Mobile adaptations are verified with Playwright in real browsers (iPhone / Android viewports); the full development and usage guide lives on the docs site ("DSH Guide → Chapter 17 Mobile Access Plugin").
-
-## Installation (production install, auto-loads on restart)
-
-This is a **static cordis plugin package** that loads automatically when DSH starts — the same installation model as official plugins (e.g. dsh-balance-plugin):
+> This is a **static cordis plugin package** that loads automatically when DSH starts — the same installation model as official plugins (e.g. dsh-balance-plugin).
 
 ### Option 1: the `dsh plugin` command
 
 ```bash
 # local directory install (development)
 dsh plugin --profile web add dsh-mobile-access
-# or install from GitHub
+
+# or install from GitHub (pinned to release v1.0.0)
 dsh plugin --profile web add dsh-mobile-access@github:TongaiLinC/dsh-mobile-access
 ```
 
@@ -82,7 +81,25 @@ Then run `pnpm install` (or `npm install`) inside the profile directory and **re
 
 Run the content of `dsh-mobile-access.js` as `code.host` in a Web GUI session via `cordis_define` + `cordis_run`. The dynamic build is **process-scoped** and must be redeployed after each DSH restart; it suits fast iteration, while production use should prefer options 1/2.
 
-## Usage
+### Requirements
+
+- DeepSeek Harness (Web GUI build) with the Cordis plugin system
+- A PC running DSH with normal network access (Windows / macOS / Linux — address enumeration auto-adapts)
+- Phone and PC on the same LAN (for LAN access), or Tailscale / ZeroTier installed on both (for VPN access)
+- Windows users: allow the gateway port (default `3081`, TCP inbound) through the firewall
+
+### Development environment
+
+This plugin is developed with DeepSeek Harness in **Create mode**:
+
+- Primary model: `deepseek-v4-flash` (Max mode)
+- Secondary model: `deepseek-v4-pro` (Max mode)
+
+Mobile adaptations are verified with Playwright in real browsers (iPhone / Android viewports).
+
+---
+
+## Quick start
 
 ### 1. PC: start the gateway
 
@@ -123,7 +140,21 @@ Click the bottom-right 「📱」 button to open the "Mobile Access" panel:
 - **Block direct WAN**: when enabled, devices from WAN sources are blocked and must connect via VPN;
 - **Gateway port**: change it and click "Save policy".
 
-## How it works (brief)
+### Repository layout
+
+```
+dsh-mobile-access/                  # this repo IS an installable DSH plugin package (npm layout)
+├── package.json                    # package manifest: dsh.bundle.patch points at cordis.patch.yml
+├── cordis.patch.yml                # composition patch: inserts the plugin row into the profile
+├── lib/index.js                    # Host plugin body (static cordis plugin, ESM)
+├── dsh-mobile-access.js            # dynamic source (code.host function body for in-session cordis_define)
+├── README.md / README.en.md        # bilingual readmes
+└── CHANGELOG.md                    # version changelog
+```
+
+---
+
+## How it works
 
 ```
 phone ──> http://<LAN-IP>:3081 (gateway proxy, 0.0.0.0)
@@ -143,6 +174,8 @@ Key mechanisms:
 - `subprocess` spawns the node gateway proxy process, forwarding HTTP and WebSocket (including the 101 upgrade handshake);
 - Device approval, policy, and mode selections are persisted via `fs`.
 
+---
+
 ## FAQ
 
 **Q: The phone can't open `http://<IP>:3081`?**
@@ -160,13 +193,19 @@ Yes, but using a VPN (Tailscale / ZeroTier) is strongly recommended; enable "Blo
 **Q: The phone can't connect after changing the gateway port?**
 After saving the policy, **restart the gateway** (stop then start) and make sure the firewall allows the new port.
 
+---
+
+## Third-party adaptation
+
+[dsh-balance-plugin](https://github.com/Francis-Xavier-code/dsh-balance-plugin) (DeepSeek balance monitoring and usage statistics: balance monitoring · official top-up entry · Miyu-style usage stats · third-party plugin management) renders its overlay inline in the input bar, which causes mobile issues such as truncated overlays, overlays covered by the sidebar/topbar, and overflowing detail tables — this plugin ships a complete adaptation suite (overlay stacking/position fixes, render-level verification, iOS overlay migration, horizontal table scrolling). No extra configuration needed after installation. See section 8.4 of the docs.
+
+---
+
 ## Documentation
 
 Full development and usage documentation lives on the docs site: "DSH Guide → Chapter 17 Mobile Access Plugin" — [https://docs.tongai.vip/docs/dsh/zhinandaodu.html](https://docs.tongai.vip/docs/dsh/zhinandaodu.html) (17 chapters: installation, PC panel, phone flows, network-detection algorithms, gateway proxy, API reference, persistence, mobile UI adaptations, and more).
 
-## Third-party plugin adaptation
-
-[dsh-balance-plugin](https://github.com/Francis-Xavier-code/dsh-balance-plugin) (DeepSeek balance monitoring and usage statistics: balance monitoring · official top-up entry · Miyu-style usage stats · third-party plugin management) renders its overlay inline in the input bar, which causes mobile issues such as truncated overlays, overlays covered by the sidebar/topbar, and overflowing detail tables — this plugin ships a complete adaptation suite (overlay stacking/position fixes, render-level verification, iOS overlay migration, horizontal table scrolling). No extra configuration needed after installation. See section 8.4 of the docs.
+---
 
 ## License
 
