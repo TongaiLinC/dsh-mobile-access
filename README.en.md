@@ -57,8 +57,8 @@ For security, the DeepSeek Harness web server binds `127.0.0.1` only, and `--hos
 # local directory install (development)
 dsh plugin --profile web add dsh-mobile-access
 
-# or install from GitHub (pinned to release v1.0.3)
-dsh plugin --profile web add dsh-mobile-access@github:TongaiLinC/dsh-mobile-access#v1.0.3
+# or install from GitHub (pinned to release v1.0.4)
+dsh plugin --profile web add dsh-mobile-access@github:TongaiLinC/dsh-mobile-access#v1.0.4
 ```
 
 ### Option 2: edit the profile manually (same as existing plugins)
