@@ -17,7 +17,8 @@
     "lib",
     "cordis.patch.yml",
     "dsh-mobile-access.js",
-    "README.md"
+    "README.md",
+    "README.en.md"
   ],
   "license": "MIT",
   "repository": {

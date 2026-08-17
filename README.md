@@ -1,5 +1,7 @@
 # dsh-mobile-access
 
+> 中文 | [English](README.en.md)
+
 DeepSeek Harness 移动端访问插件 —— 让手机 / 平板通过局域网或 VPN 访问 DeepSeek Harness Web GUI，并内置 **PC 端审批门禁**、**LAN / VPN / 公网自动识别** 与 **网络模式切换**。
 
 > DeepSeek Harness 的 Web 服务器出于安全设计只绑定 `127.0.0.1`，且官方禁止 `--host 0.0.0.0`。本插件通过插件运行时（`webServer` + `subprocess`）实现：PC 端一键启动**网关代理**（监听 `0.0.0.0:<端口>`），手机扫码即可访问；首次访问必须由 PC 端批准，防止未授权设备接入。
