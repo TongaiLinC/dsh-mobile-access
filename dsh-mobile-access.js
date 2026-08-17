@@ -1327,6 +1327,12 @@ function forward(req, res, upgradeSocket, upgradeHead) {
   for (var k in req.headers) headers[k] = req.headers[k]
   headers['host'] = '127.0.0.1:' + mainPort
   if (headers['origin']) headers['origin'] = 'http://127.0.0.1:' + mainPort
+  /* v1.0.2：透传原始 Host 与来源 IP——主服务器只能识别 127.0.0.1（回环）
+     无法区分真实访问方式；带 x-dshm-forwarded-host / x-dshm-real-ip 后，
+     插件按原始 Host 归类（域名 → vpn，局域网 IP → lan），手机断开 Wi-Fi
+     走蜂窝 + Tailscale 域名时正确显示 VPN 而非局域网 */
+  headers['x-dshm-forwarded-host'] = req.headers['host'] || ''
+  headers['x-dshm-real-ip'] = req.socket.remoteAddress || ''
   if (upgradeSocket) {
     /* WebSocket 升级转发：http.request 不会自动补升级头，必须显式设置，
        否则主服务器把升级请求当普通 GET（永远没有 101，握手挂起） */
