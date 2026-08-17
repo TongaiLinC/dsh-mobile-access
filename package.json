@@ -28,11 +28,15 @@
   "keywords": [
     "deepseek-harness",
     "dsh",
+    "dsh-plugin",
     "cordis",
     "plugin",
     "mobile",
     "lan",
+    "vpn",
     "tailscale",
-    "zerotier"
+    "zerotier",
+    "gateway",
+    "approval-gate"
   ]
 }
